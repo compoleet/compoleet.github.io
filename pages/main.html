@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игра-Тир</title>
+    <link rel="stylesheet" href="../css/main.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="top-row">
+            <button id="start-game">Начать игру</button>
+            <button id="stop-game">Закончить игру</button>
+        </div>
+        
+
+        <div class="center-column game-window">
+            <canvas id="game-canvas" width="600" height="400"></canvas>
+        </div>
+        
+
+        <div class="left-column rating-list">
+            <h2>Рейтинг игроков:</h2>
+            <ul id="player-rating">
+                <li>Имя Игрока — 10 очков</li>
+                <li>Имя Игрока — 8 очков</li>
+                <li>Имя Игрока — 6 очков</li>
+            </ul>
+        </div>
+        
+
+        <div class="bottom-row settings-panel">
+            <h2>Настройки игры:</h2>
+            <label>Размер мишени:</label>
+            <div>
+                <input type="radio" id="small-target" name="target-size" value="5%" >
+                <label for="small-target">Маленькая</label>
+                
+                <input type="radio" id="normal-target" name="target-size" value="10%" checked>
+                <label for="normal-target">Средняя</label>
+                
+                <input type="radio" id="large-target" name="target-size" value="15%">
+                <label for="large-target">Большая</label>
+            </div>
+            
+            <label>Скорость появления мишеней:</label>
+            <div>
+                <input type="radio" id="slow-spawn" name="spawn-speed" value="3" >
+                <label for="slow-spawn">Медленно</label>
+                
+                <input type="radio" id="medium-spawn" name="spawn-speed" value="2" checked>
+                <label for="medium-spawn">Нормальная</label>
+                
+                <input type="radio" id="fast-spawn" name="spawn-speed" value="1">
+                <label for="fast-spawn">Быстрая</label>
+            </div>
+            
+            <label>Время существования мишени:</label>
+            <div>
+                <input type="radio" id="short-life" name="target-lifetime" value="3" >
+                <label for="short-life">Краткосрочная</label>
+                
+                <input type="radio" id="medium-life" name="target-lifetime" value="5" checked>
+                <label for="medium-life">Среднесрочная</label>
+                
+                <input type="radio" id="long-life" name="target-lifetime" value="10">
+                <label for="long-life">Долговременная</label>
+            </div>
+        </div>
+    </div>
+		<script src="../js/script.js"></script>
+</body>
+
+</html>
