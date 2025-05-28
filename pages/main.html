@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <title>Игра-Тир</title>
     <link rel="stylesheet" href="../css/main.css">
-
 </head>
 <body>
-
+    <!-- Контейнер страницы -->
     <div class="container">
-
-        <div class="top-row">
+        <!-- Левая колонка: Рейтинг -->
+        <div class="left-column rating-list">
+            <h2>Рейтинг игроков:</h2>
+            <ul id="player-rating">
+            </ul>
+        </div>
+        
+        <!-- Центральная область: Игра -->
+        <div class="center-column game-window" id="game-field"></div>
+        
+        <!-- Бокс результата игры -->
+        <div class="result-container">
+            <p id="score-text">Очки: 0</p>
+        </div>
+        
+        <!-- Кнопки управления -->
+        <div class="right-column control-panel">
             <button id="start-game">Начать игру</button>
             <button id="stop-game">Закончить игру</button>
         </div>
         
-
-        <div class="center-column game-window">
-            <canvas id="game-canvas" width="600" height="400"></canvas>
-        </div>
-        
-
-        <div class="left-column rating-list">
-            <h2>Рейтинг игроков:</h2>
-            <ul id="player-rating">
-                <li>Имя Игрока — 10 очков</li>
-                <li>Имя Игрока — 8 очков</li>
-                <li>Имя Игрока — 6 очков</li>
-            </ul>
-        </div>
-        
-
+        <!-- Панель настроек -->
         <div class="bottom-row settings-panel">
             <h2>Настройки игры:</h2>
             <label>Размер мишени:</label>
@@ -38,7 +37,7 @@
                 <input type="radio" id="small-target" name="target-size" value="5%" >
                 <label for="small-target">Маленькая</label>
                 
-                <input type="radio" id="normal-target" name="target-size" value="10%" checked>
+                <input type="radio" id="normal-target" name="target-size" value="10%"checked>
                 <label for="normal-target">Средняя</label>
                 
                 <input type="radio" id="large-target" name="target-size" value="15%">
@@ -47,30 +46,18 @@
             
             <label>Скорость появления мишеней:</label>
             <div>
-                <input type="radio" id="slow-spawn" name="spawn-speed" value="3" >
-                <label for="slow-spawn">Медленно</label>
+                <input type="radio" id="slow-spawn" name="spawn-speed" value="5" >
+                <label for="slow-spawn">Медленно (5 сек.)</label>
                 
-                <input type="radio" id="medium-spawn" name="spawn-speed" value="2" checked>
-                <label for="medium-spawn">Нормальная</label>
+                <input type="radio" id="medium-spawn" name="spawn-speed" value="3" checked>
+                <label for="medium-spawn">Средне (3 сек.)</label>
                 
                 <input type="radio" id="fast-spawn" name="spawn-speed" value="1">
-                <label for="fast-spawn">Быстрая</label>
-            </div>
-            
-            <label>Время существования мишени:</label>
-            <div>
-                <input type="radio" id="short-life" name="target-lifetime" value="3" >
-                <label for="short-life">Краткосрочная</label>
-                
-                <input type="radio" id="medium-life" name="target-lifetime" value="5" checked>
-                <label for="medium-life">Среднесрочная</label>
-                
-                <input type="radio" id="long-life" name="target-lifetime" value="10">
-                <label for="long-life">Долговременная</label>
+                <label for="fast-spawn">Быстро (1 сек.)</label>
             </div>
         </div>
     </div>
-		<script src="../js/script.js"></script>
-</body>
 
+    <script src="../js/script.js"></script>
+</body>
 </html>

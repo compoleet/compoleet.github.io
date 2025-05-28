@@ -1,34 +1,97 @@
 // Переменные состояния игры
 let isGameRunning = false;
+let score = 0; // Текущие очки игрока
 let targetSizePercent = 10; // Начальный размер мишени в % от поля
 let spawnSpeed = 3; // Начальная скорость появления мишеней в секундах
-let targetLifetime = 3; // Начальное время жизни мишени в секундах
+let currentTarget = null; // Данные о текущей мишени
 
-const canvas = document.getElementById('game-canvas');
-const ctx = canvas.getContext('2d');
+// Счётчик очков
+const scoreText = document.getElementById("score-text");
+updateScoreDisplay(); // Изначально устанавливаем счёт
 
-// Функция рисования мишени
-function drawTarget(x, y, percent) {
-    const radius = Math.min(canvas.width, canvas.height) * percent / 100 / 2; // Рассчитываем радиус в процентах от поля
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2, true); // Круглая мишень
-    ctx.fillStyle = '#FFD700'; // Золотистый цвет
-    ctx.fill();
+// Игровое поле
+const gameField = document.getElementById("game-field");
+
+// Создание новой мишени
+function createNewTarget() {
+    // Определяем ширину и высоту мишени
+    const fieldWidth = gameField.offsetWidth;
+    const fieldHeight = gameField.offsetHeight;
+    const targetRadius = Math.min(fieldWidth, fieldHeight) * targetSizePercent / 100 / 2;
+    const targetDiameter = targetRadius * 2;
+
+    // Позиции мишени (ограничиваем случайные координаты)
+    const x = Math.floor(Math.random() * (fieldWidth - targetDiameter));
+    const y = Math.floor(Math.random() * (fieldHeight - targetDiameter));
+
+    // Создаем новую мишень
+    const newTarget = document.createElement("div");
+    newTarget.className = "target";
+    newTarget.style.setProperty("--target-size", `${targetDiameter}px`);
+    newTarget.style.left = `${x}px`;
+    newTarget.style.top = `${y}px`;
+
+    // Назначаем обработчик клика
+    newTarget.onclick = handleClickOnTarget;
+
+    // Добавляем мишень на игровое поле
+    gameField.appendChild(newTarget);
+
+    // Ставим таймер следующего появления мишени
+    currentTarget = {
+        element: newTarget,
+        timerID: setTimeout(() => {
+            removeTarget(newTarget); // Удаляем предыдущую мишень
+            createNewTarget(); // Создаем новую мишень
+        }, spawnSpeed * 1000)
+    };
 }
 
-// Ограничиваем позицию мишени, чтобы она не выходила за пределы холста
-function limitPosition(x, y, radius) {
-    return [
-        Math.max(radius, Math.min(x, canvas.width - radius)), // Корректировка X
-        Math.max(radius, Math.min(y, canvas.height - radius)) // Корректировка Y
-    ];
+// Обработчик клика по мишени
+function handleClickOnTarget(event) {
+    if (!isGameRunning) return;
+
+    // Удаляем текущую мишень
+    removeTarget(this);
+
+    // Создаем новую мишень
+    createNewTarget();
+
+    // Повышаем очки
+    score++;
+    updateScoreDisplay();
+}
+
+// Обработчик клика по игровому полю
+gameField.addEventListener('click', event => {
+    if (!event.target.classList.contains('target') && isGameRunning) {
+        // Штрафуем игрока за промах
+        score--;
+        updateScoreDisplay();
+    }
+});
+
+// Удаление мишени
+function removeTarget(target) {
+    if (currentTarget) {
+        clearTimeout(currentTarget.timerID); // Останавливаем таймер
+        currentTarget.element.remove(); // Удаляем мишень
+        currentTarget = null;
+    }
+}
+
+// Обновление отображения очков
+function updateScoreDisplay() {
+    scoreText.textContent = `Очки: ${score}`;
 }
 
 // Запуск игры
 document.getElementById('start-game').addEventListener('click', () => {
     if (!isGameRunning) {
         isGameRunning = true;
-        startGameLoop(); // Начинаем цикл игры
+        score = 0; // Сбрасываем счётчик очков
+        updateScoreDisplay(); // Обновляем отображение очков
+        createNewTarget(); // Создаем первую мишень
     }
 });
 
@@ -36,6 +99,7 @@ document.getElementById('start-game').addEventListener('click', () => {
 document.getElementById('stop-game').addEventListener('click', () => {
     if (isGameRunning) {
         isGameRunning = false;
+        removeTarget(currentTarget.element); // Убираем последнюю мишень
     }
 });
 
@@ -51,35 +115,3 @@ document.querySelectorAll('[name="spawn-speed"]').forEach(radio => {
         spawnSpeed = parseInt(e.target.value); // Сохраняем выбранную скорость появления
     });
 });
-
-document.querySelectorAll('[name="target-lifetime"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-        targetLifetime = parseInt(e.target.value); // Сохраняем выбранное время жизни мишени
-    });
-});
-
-// Основная игровая логика
-function startGameLoop() {
-    let lastSpawnTime = Date.now();
-    function update() {
-        requestAnimationFrame(update);
-        if (isGameRunning && (Date.now() - lastSpawnTime >= spawnSpeed * 1000)) { // Проверяем необходимость спауна новой мишени
-            clearCanvas();
-            const radius = Math.min(canvas.width, canvas.height) * targetSizePercent / 100 / 2; // Вычисляем радиус
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            const [limitedX, limitedY] = limitPosition(x, y, radius); // Применяем ограничение позиций
-            drawTarget(limitedX, limitedY, targetSizePercent); // Рисуем новую мишень
-            lastSpawnTime = Date.now();
-        }
-    }
-    update();
-}
-
-// Очистка холста
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-// Инициализация начальной позиции
-clearCanvas();
