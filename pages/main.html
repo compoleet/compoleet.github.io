@@ -18,7 +18,7 @@
         
         <!-- результат игры -->
         <div class="result-container">
-            <p id="score-text" class="text">Очки: 0</p>
+            <h2 id="score-text" class="text">Очки: 0</h2>
         </div>
         
         <!-- Кнопки управления -->
@@ -27,61 +27,36 @@
             <button id="stop-game">Закончить игру</button>
         </div>
         
+        <!-- Форма ввода имени пользователя -->
+        <form id="save-score-form" style="display:none;" method="post">
+            <label for="username-input">Введите Ваше имя:</label>
+            <input type="text" id="username-input" required placeholder="Имя игрока">
+            <button type="submit">Сохранить результат</button>
+        </form>
+        
         <!-- Панель настроек -->
         <div class="bottom-row settings-panel">
             <h2>Настройки игры:</h2>
             <label>Размер мишени:</label>
             <div>
-                <div>
-                <input type="radio" id="small-target" name="target-size" value="3%" >
-                <label for="small-target">Микроскопическая</label>
-                </div>
-                <div>
-                <input type="radio" id="small-target" name="target-size" value="5%" >
-                <label for="small-target">Маленькая</label>
-                </div>
-
-                <div>
-                <input type="radio" id="normal-target" name="target-size" value="10%"checked>
-                <label for="normal-target">Средняя</label>
-                </div>
-
-
-                <div>
-                <input type="radio" id="large-target" name="target-size" value="15%">
-                <label for="large-target">Большая</label>
-                </div>
-
+                <div><input type="radio" id="small-target" name="target-size" value="3%"><label for="small-target">Микроскопическая</label></div>
+                <div><input type="radio" id="small-target" name="target-size" value="5%"><label for="small-target">Маленькая</label></div>
+                <div><input type="radio" id="normal-target" name="target-size" value="10%" checked><label for="normal-target">Средняя</label></div>
+                <div><input type="radio" id="large-target" name="target-size" value="15%"><label for="large-target">Большая</label></div>
             </div>
             
             <label>Скорость появления мишеней:</label>
             <div>
-                <div>
-                <input type="radio" id="slow-spawn" name="spawn-speed" value="1.5" >
-                <label for="slow-spawn">Медленная </label>
-                </div>
-
-                <div>
-                <input type="radio" id="medium-spawn" name="spawn-speed" value="1" checked>
-                <label for="medium-spawn">Средняя </label>
-                </div>
-
-                <div>
-                <input type="radio" id="fast-spawn" name="spawn-speed" value="0.5">
-                <label for="fast-spawn">Быстрая </label>
-                </div>
-
-               <div>
-                <input type="radio" id="extrim-spawn" name="spawn-speed" value="0.1">
-                <label for="fast-spawn">ЭКСТРИМАЛЬНАЯ СКОРОСТЬ </label>
-               </div> 
+                <div><input type="radio" id="slow-spawn" name="spawn-speed" value="1.5"><label for="slow-spawn">Медленная</label></div>
+                <div><input type="radio" id="medium-spawn" name="spawn-speed" value="1" checked><label for="medium-spawn">Средняя</label></div>
+                <div><input type="radio" id="fast-spawn" name="spawn-speed" value="0.5"><label for="fast-spawn">Быстрая</label></div>
+                <div><input type="radio" id="extrim-spawn" name="spawn-speed" value="0.1"><label for="fast-spawn">Экстремальная скорость</label></div>
             </div>
             <label>Настройка цвета:</label>
             <div>
-                <div >Цвет мишени :<input type="color" id="target-color"></div>
-                <div >Цвет игрового поля :  <input type="color" id="game-border-color"></div>
+                <div>Цвет мишени :<input type="color" id="target-color" value="#ffd700"></div>
+                <div>Цвет игрового поля :<input type="color" id="game-border-color" value="#dfffe0"></div>
             </div>
-            
         </div>
     </div>
     <div class="footer"></div>

@@ -22,7 +22,7 @@ background-color: antiquewhite;
 max-width: 100%;
 }
 #game-field{
-    background-color:  #dfffe0;;
+    background-color:  #dfffe0;
 }
 .container {
     display: grid;
@@ -73,7 +73,7 @@ max-width: 100%;
 .game-window {
     width: 100%;
     height: 400px;
-    border: 1mm solid rgba(211, 220, 50, 0.6);
+    border: 1mm solid #d3dc3299;
     position: relative;
 }
 
@@ -81,7 +81,7 @@ max-width: 100%;
     position: absolute;
     width: var(--target-size);
     height: var(--target-size);
-    background-color: gold;
+    background-color: #ffd700;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -149,3 +149,4 @@ max-width: 100%;
         justify-content: center;
     }
 }
+
