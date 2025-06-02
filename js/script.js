@@ -1,13 +1,20 @@
-// Переменные состояния игры
 let isGameRunning = false;
-let score = 0; // Текущие очки игрока
+let score = 0; 
 let targetSizePercent = 10; // Начальный размер мишени в % от поля
-let spawnSpeed = 3; // Начальная скорость появления мишеней в секундах
-let currentTarget = null; // Данные о текущей мишени
+let spawnSpeed = 1; // Начальная скорость появления мишеней в секундах
+let currentTarget = null; 
+let tc='gold';
+document.getElementById("game-border-color").addEventListener('change',(event)=>{
+    gameField.style.backgroundColor=event.target.value;
+});
+
+document.getElementById("target-color").addEventListener('change',(event)=>{
+tc=event.target.value;
+});
 
 // Счётчик очков
 const scoreText = document.getElementById("score-text");
-updateScoreDisplay(); // Изначально устанавливаем счёт
+updateScoreDisplay();
 
 // Игровое поле
 const gameField = document.getElementById("game-field");
@@ -30,6 +37,7 @@ function createNewTarget() {
     newTarget.style.setProperty("--target-size", `${targetDiameter}px`);
     newTarget.style.left = `${x}px`;
     newTarget.style.top = `${y}px`;
+    newTarget.style.backgroundColor=tc;
 
     // Назначаем обработчик клика
     newTarget.onclick = handleClickOnTarget;
@@ -66,7 +74,9 @@ function handleClickOnTarget(event) {
 gameField.addEventListener('click', event => {
     if (!event.target.classList.contains('target') && isGameRunning) {
         // Штрафуем игрока за промах
-        score--;
+        if(score>0){
+            score--;
+        }
         updateScoreDisplay();
     }
 });
@@ -99,19 +109,19 @@ document.getElementById('start-game').addEventListener('click', () => {
 document.getElementById('stop-game').addEventListener('click', () => {
     if (isGameRunning) {
         isGameRunning = false;
-        removeTarget(currentTarget.element); // Убираем последнюю мишень
+        removeTarget(currentTarget.element); 
     }
 });
 
 // Обработчики настроек
 document.querySelectorAll('[name="target-size"]').forEach(radio => {
     radio.addEventListener('change', e => {
-        targetSizePercent = parseFloat(e.target.value.replace('%', '')); // Получаем значение в процентах
+        targetSizePercent = parseFloat(e.target.value.replace('%', '')); 
     });
 });
 
 document.querySelectorAll('[name="spawn-speed"]').forEach(radio => {
     radio.addEventListener('change', e => {
-        spawnSpeed = parseInt(e.target.value); // Сохраняем выбранную скорость появления
+        spawnSpeed = parseFloat(e.target.value); 
     });
 });

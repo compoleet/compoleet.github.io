@@ -6,21 +6,19 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-    <!-- Контейнер страницы -->
+  <div class="title"><h1>СТРЕЛЯЙ!!!<h1></div>
     <div class="container">
-        <!-- Левая колонка: Рейтинг -->
         <div class="left-column rating-list">
             <h2>Рейтинг игроков:</h2>
             <ul id="player-rating">
             </ul>
         </div>
         
-        <!-- Центральная область: Игра -->
         <div class="center-column game-window" id="game-field"></div>
         
-        <!-- Бокс результата игры -->
+        <!-- результат игры -->
         <div class="result-container">
-            <p id="score-text">Очки: 0</p>
+            <p id="score-text" class="text">Очки: 0</p>
         </div>
         
         <!-- Кнопки управления -->
@@ -34,29 +32,59 @@
             <h2>Настройки игры:</h2>
             <label>Размер мишени:</label>
             <div>
+                <div>
+                <input type="radio" id="small-target" name="target-size" value="3%" >
+                <label for="small-target">Микроскопическая</label>
+                </div>
+                <div>
                 <input type="radio" id="small-target" name="target-size" value="5%" >
                 <label for="small-target">Маленькая</label>
-                
+                </div>
+
+                <div>
                 <input type="radio" id="normal-target" name="target-size" value="10%"checked>
                 <label for="normal-target">Средняя</label>
-                
+                </div>
+
+
+                <div>
                 <input type="radio" id="large-target" name="target-size" value="15%">
                 <label for="large-target">Большая</label>
+                </div>
+
             </div>
             
             <label>Скорость появления мишеней:</label>
             <div>
-                <input type="radio" id="slow-spawn" name="spawn-speed" value="5" >
-                <label for="slow-spawn">Медленно (5 сек.)</label>
-                
-                <input type="radio" id="medium-spawn" name="spawn-speed" value="3" checked>
-                <label for="medium-spawn">Средне (3 сек.)</label>
-                
-                <input type="radio" id="fast-spawn" name="spawn-speed" value="1">
-                <label for="fast-spawn">Быстро (1 сек.)</label>
+                <div>
+                <input type="radio" id="slow-spawn" name="spawn-speed" value="1.5" >
+                <label for="slow-spawn">Медленная </label>
+                </div>
+
+                <div>
+                <input type="radio" id="medium-spawn" name="spawn-speed" value="1" checked>
+                <label for="medium-spawn">Средняя </label>
+                </div>
+
+                <div>
+                <input type="radio" id="fast-spawn" name="spawn-speed" value="0.5">
+                <label for="fast-spawn">Быстрая </label>
+                </div>
+
+               <div>
+                <input type="radio" id="extrim-spawn" name="spawn-speed" value="0.1">
+                <label for="fast-spawn">ЭКСТРИМАЛЬНАЯ СКОРОСТЬ </label>
+               </div> 
             </div>
+            <label>Настройка цвета:</label>
+            <div>
+                <div >Цвет мишени :<input type="color" id="target-color"></div>
+                <div >Цвет игрового поля :  <input type="color" id="game-border-color"></div>
+            </div>
+            
         </div>
     </div>
+    <div class="footer"></div>
 
     <script src="../js/script.js"></script>
 </body>
