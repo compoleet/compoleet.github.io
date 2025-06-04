@@ -24,7 +24,7 @@ max-width: 100%;
 #game-field{
     background-color:  #dfffe0;
 }
-@media only screen and (min-width: 1e6px) {
+@media only screen and (min-width: 1024px) {
 .container {
     display: grid;
     grid-template-areas:
@@ -131,7 +131,7 @@ max-width: 100%;
 }
 }
 
-@media only screen and (max-width: 1e6px){
+@media only screen and (max-width: 1023px){
  .container {
         grid-template-areas:
             "top"
